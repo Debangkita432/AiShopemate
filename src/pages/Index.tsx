@@ -62,7 +62,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Creative Loader */}
+      {/* Loader */}
       {loading && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white">
           <img src="/Logo.png" alt="AIShopmate Logo" className="w-24 h-24 animate-bounce" />
@@ -74,7 +74,7 @@ const Index = () => {
       <section className="relative overflow-hidden py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
+            {/* Left */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -93,7 +93,7 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* CTA Buttons */}
+              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4">
                 {user ? (
                   userProfile ? (
@@ -125,7 +125,7 @@ const Index = () => {
                 )}
               </div>
 
-              {/* Profile Info */}
+              {/* User Info */}
               {userProfile && (
                 <div className="bg-gray-100 p-4 rounded-lg">
                   <p className="text-sm text-gray-500">Welcome back!</p>
@@ -136,7 +136,7 @@ const Index = () => {
               )}
             </motion.div>
 
-            {/* Right Avatar */}
+            {/* Avatar */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -171,9 +171,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-[#005DAA]">
-              Revolutionary Features
-            </h2>
+            <h2 className="text-4xl font-bold mb-4 text-[#005DAA]">Revolutionary Features</h2>
             <p className="text-xl text-[#FFC220] max-w-3xl mx-auto">
               Discover how AI transforms your shopping experience with cutting-edge technology
             </p>
@@ -201,7 +199,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Floating Bot Assistant (Matey) */}
+      <div className="fixed bottom-8 right-6 md:bottom-10 md:right-10 z-50">
+        <div className="relative group cursor-pointer">
+          <img
+            src="/chatbot.png"
+            alt="Matey Bot"
+            className="w-20 h-20 md:w-24 md:h-24 hover:scale-105 transition-transform"
+          />
+          <div className="absolute bottom-full right-0 mb-2 hidden group-hover:block bg-white text-[#005DAA] text-sm font-medium p-3 rounded-lg shadow-lg w-64">
+            Hi I'm <span className="font-bold">Matey</span>, your shop guide. I'm here to help you with all your questions!
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );

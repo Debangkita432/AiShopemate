@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,7 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import { ThemeProvider } from "./components/theme-provider";
-import { Navigation } from "./components/Navigation";
+import {Navigation} from "./components/Navigation"; // ✅ Fixed to default import
+
+// Pages
 import Index from "./pages/Index";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -14,6 +15,8 @@ import Onboarding from "./pages/Onboarding";
 import Shop from "./pages/Shop";
 import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/profile"; // Edit Profile Page
+import ShowProfile from "./pages/account"; // ✅ Correct default import path
 
 const queryClient = new QueryClient();
 
@@ -34,6 +37,8 @@ const App = () => (
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/categories" element={<Categories />} />
+                <Route path="/account" element={<ShowProfile />} /> {/* Show Profile Page */}
+                <Route path="/profile" element={<Profile />} />      {/* Edit Profile Page */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
