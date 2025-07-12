@@ -1,0 +1,72 @@
+[
+  {
+    "id": "p001",
+    "name": "Black Cotton T-Shirt",
+    "category": "Clothing",
+    "tags": ["black", "cotton", "casual", "summer"],
+    "price": 499
+  },
+  {
+    "id": "p002",
+    "name": "White Formal Shirt",
+    "category": "Clothing",
+    "tags": ["white", "formal", "office", "men"],
+    "price": 899
+  },
+  {
+    "id": "p003",
+    "name": "Running Shoes",
+    "category": "Shoes",
+    "tags": ["running", "black", "sports", "gym"],
+    "price": 1299
+  },
+  {
+    "id": "p004",
+    "name": "Red Lipstick Matte Finish",
+    "category": "Cosmetics",
+    "tags": ["red", "lipstick", "makeup", "matte"],
+    "price": 299
+  },
+  {
+    "id": "p005",
+    "name": "Waterproof Eyeliner",
+    "category": "Cosmetics",
+    "tags": ["black", "eyeliner", "waterproof", "makeup"],
+    "price": 349
+  },
+  {
+    "id": "p006",
+    "name": "Bluetooth Earbuds",
+    "category": "Electronics",
+    "tags": ["audio", "bluetooth", "wireless", "music"],
+    "price": 1599
+  },
+  {
+    "id": "p007",
+    "name": "Yoga Mat (6mm)",
+    "category": "Fitness",
+    "tags": ["yoga", "fitness", "mat", "home workout"],
+    "price": 699
+  },
+  {
+    "id": "p008",
+    "name": "Sports Watch Digital",
+    "category": "Accessories",
+    "tags": ["sports", "watch", "digital", "unisex"],
+    "price": 1199
+  },
+  {
+    "id": "p009",
+    "name": "Kitchen Knife Set (3 pcs)",
+    "category": "Kitchen",
+    "tags": ["knife", "kitchen", "cutting", "cooking"],
+    "price": 499
+  },
+  {
+    "id": "p010",
+    "name": "Face Moisturizer - Herbal",
+    "category": "Cosmetics",
+    "tags": ["face", "moisturizer", "herbal", "skin"],
+    "price": 259
+  }
+]
