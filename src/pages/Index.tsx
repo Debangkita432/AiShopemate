@@ -14,23 +14,13 @@ const Index = () => {
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const features = [
-    { title: "AI Avatar Assistant", description: "Interactive 3D AI that guides your shopping journey" },
-    { title: "Smart Recommendations", description: "Personalized product suggestions based on your preferences" },
-    { title: "Budget Management", description: "Keep track of your spending with real-time budget updates" },
-    { title: "Virtual Try-On", description: "See how products look on you before buying" },
-    { title: "Voice Shopping", description: "Shop hands-free with voice commands and AI chat" },
-    { title: "Smart Search", description: "Find exactly what you need with AI-powered search" }
-  ];
-
   useEffect(() => {
     const generateWelcomeMessage = async () => {
       setIsAiSpeaking(true);
       try {
-        const greeting = user && userProfile 
+        const greeting = user && userProfile
           ? `Welcome back ${userProfile.name}! Ready to continue your shopping journey?`
           : "Welcome to AIShopmate! I'm your AI shopping assistant. Ready to revolutionize your shopping experience?";
-
         const response = await generateAIResponse(greeting, shopingAssistantContext);
         setAiMessage(response);
       } catch (error) {
@@ -62,19 +52,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Loader */}
       {loading && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white">
           <img src="/Logo.png" alt="AIShopmate Logo" className="w-24 h-24 animate-bounce" />
-          <p className="mt-4 text-lg font-semibold text-[#005DAA] animate-pulse">Getting your smart shopping experience ready...</p>
+          <p className="mt-4 text-lg font-semibold text-[#005DAA] animate-pulse">
+            Getting your smart shopping experience ready...
+          </p>
         </div>
       )}
 
-      {/* Hero Section */}
       <section className="relative overflow-hidden py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -93,7 +82,6 @@ const Index = () => {
                 </p>
               </div>
 
-              {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-4">
                 {user ? (
                   userProfile ? (
@@ -125,7 +113,6 @@ const Index = () => {
                 )}
               </div>
 
-              {/* User Info */}
               {userProfile && (
                 <div className="bg-gray-100 p-4 rounded-lg">
                   <p className="text-sm text-gray-500">Welcome back!</p>
@@ -136,18 +123,13 @@ const Index = () => {
               )}
             </motion.div>
 
-            {/* Avatar */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-gray-100 p-6 rounded-2xl"
             >
-              <AIAvatar
-                isSpeaking={isAiSpeaking}
-                message={aiMessage}
-                onVoiceInput={handleVoiceInput}
-              />
+              <AIAvatar isSpeaking={isAiSpeaking} message={aiMessage} onVoiceInput={handleVoiceInput} />
               {aiMessage && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -162,7 +144,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -171,35 +152,41 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4 text-[#005DAA]">Revolutionary Features</h2>
-            <p className="text-xl text-[#FFC220] max-w-3xl mx-auto">
-              Discover how AI transforms your shopping experience with cutting-edge technology
-            </p>
+            <h2 className="text-4xl font-bold mb-4 text-[#005DAA]"> Features</h2>
+
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card className="bg-white border hover:shadow-xl hover:border-[#005DAA] transition-all duration-300 transform hover:-translate-y-1 h-full">
-                  <CardContent className="p-6 text-center">
-                    <h3 className="text-xl font-semibold text-[#005DAA] mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="bg-white border hover:shadow-xl hover:border-[#005DAA] transition-all duration-300 transform hover:-translate-y-1 h-full">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-xl font-semibold text-[#005DAA] mb-3">
+                  Budget Management
+                </h3>
+                <p className="text-gray-600">
+                  Keep track of your spending with real-time budget updates.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white border hover:shadow-xl hover:border-[#005DAA] transition-all duration-300 transform hover:-translate-y-1 h-full">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-xl font-semibold text-[#005DAA] mb-3">
+                  Virtual Try-On
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  See how products look on you before buying.
+                </p>
+                <Link to="/virtualtryon">
+                  <Button className="text-white bg-[#005DAA] hover:bg-[#004b91] transition px-6 py-2">
+                    Try Now
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Floating Bot Assistant (Matey) */}
       <div className="fixed bottom-8 right-6 md:bottom-10 md:right-10 z-50">
         <div className="relative group cursor-pointer">
           <img
