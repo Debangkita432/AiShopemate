@@ -127,22 +127,22 @@ export default function Onboarding() {
       case 1:
         return (
           <div className="space-y-4">
-            <label className="text-lg font-medium neon-text">Enter your age:</label>
+            <label className="text-lg font-medium text-white">Enter your age:</label>
             <Input
               type="number"
               placeholder="25"
               value={formData.age}
               onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))}
-              className="glass-morphism border-neon-blue focus:border-neon-green text-lg"
+              className="glass-morphism border-white focus:border-white text-lg"
             />
           </div>
         );
       case 2:
         return (
           <div className="space-y-4">
-            <label className="text-lg font-medium neon-text">Select your gender:</label>
+            <label className="text-lg font-medium text-white">Select your gender:</label>
             <Select value={formData.gender} onValueChange={(value) => setFormData(prev => ({ ...prev, gender: value }))}>
-              <SelectTrigger className="glass-morphism border-neon-blue focus:border-neon-green text-lg">
+              <SelectTrigger className="glass-morphism border-white focus:border-white text-lg">
                 <SelectValue placeholder="Choose gender" />
               </SelectTrigger>
               <SelectContent className="glass-morphism">
@@ -157,35 +157,35 @@ export default function Onboarding() {
       case 3:
         return (
           <div className="space-y-4">
-            <label className="text-lg font-medium neon-text">Contact Number:</label>
+            <label className="text-lg font-medium text-white">Contact Number:</label>
             <Input
               type="tel"
               placeholder="+1 (555) 123-4567"
               value={formData.contactNumber}
               onChange={(e) => setFormData(prev => ({ ...prev, contactNumber: e.target.value }))}
-              className="glass-morphism border-neon-blue focus:border-neon-green text-lg"
+              className="glass-morphism border-white focus:border-white text-lg"
             />
           </div>
         );
       case 4:
         return (
           <div className="space-y-4">
-            <label className="text-lg font-medium neon-text">Shopping Budget ($):</label>
+            <label className="text-lg font-medium text-white">Shopping Budget ($):</label>
             <Input
               type="number"
               placeholder="500"
               value={formData.budget}
               onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
-              className="glass-morphism border-neon-blue focus:border-neon-green text-lg"
+              className="glass-morphism border-white focus:border-white text-lg"
             />
           </div>
         );
       case 5:
         return (
           <div className="space-y-4">
-            <label className="text-lg font-medium neon-text">Select Category:</label>
+            <label className="text-lg font-medium text-white">Select Category:</label>
             <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
-              <SelectTrigger className="glass-morphism border-neon-blue focus:border-neon-green text-lg">
+              <SelectTrigger className="glass-morphism border-white focus:border-white text-lg">
                 <SelectValue placeholder="Choose category" />
               </SelectTrigger>
               <SelectContent className="glass-morphism">
@@ -211,7 +211,7 @@ export default function Onboarding() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <h1 className="text-4xl font-bold neon-text bg-neon-gradient bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold text-white bg-white bg-clip-text text-transparent mb-4">
             Let's Get Started!
           </h1>
           <p className="text-xl text-muted-foreground">
@@ -238,7 +238,7 @@ export default function Onboarding() {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 p-4 glass-morphism rounded-lg"
               >
-                <p className="text-lg text-center neon-text">{aiMessage}</p>
+                <p className="text-lg text-center text-white">{aiMessage}</p>
               </motion.div>
             )}
           </motion.div>
@@ -249,9 +249,9 @@ export default function Onboarding() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Card className="glass-morphism neon-border">
+            <Card className="glass-morphism border-white">
               <CardHeader>
-                <CardTitle className="text-2xl neon-text">
+                <CardTitle className="text-2xl text-white">
                   Step {step} of 5
                 </CardTitle>
                 <CardDescription className="text-muted-foreground">
@@ -266,7 +266,7 @@ export default function Onboarding() {
                     variant="outline"
                     onClick={() => setStep(Math.max(1, step - 1))}
                     disabled={step === 1}
-                    className="glass-morphism border-neon-purple hover-glow"
+                    className="glass-morphism border-white hover:shadow-lg"
                   >
                     Previous
                   </Button>
@@ -274,7 +274,7 @@ export default function Onboarding() {
                   <Button
                     onClick={handleNext}
                     disabled={loading}
-                    className="bg-neon-gradient text-black font-semibold hover-glow"
+                    className="bg-white text-black font-semibold hover:shadow-lg"
                   >
                     {step === 5 ? (loading ? 'Completing...' : 'Complete Setup') : 'Next'}
                   </Button>
@@ -283,7 +283,7 @@ export default function Onboarding() {
                 {/* Progress Bar */}
                 <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
                   <motion.div
-                    className="bg-neon-gradient h-2 rounded-full"
+                    className="bg-white h-2 rounded-full"
                     initial={{ width: '20%' }}
                     animate={{ width: `${(step / 5) * 100}%` }}
                     transition={{ duration: 0.3 }}

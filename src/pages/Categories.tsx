@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Laptop, Shirt, Home } from 'lucide-react';
+import BudgetTracker from '../components/BudgetTracker';
 
 const categories = [
   {
@@ -47,11 +48,12 @@ export default function Categories() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-4 text-[#005DAA]">Shop by Category</h1>
+          <h1 className="text-4xl font-bold mb-4 text-white">Shop by Category</h1>
           <p className="text-xl text-gray-600">
             Explore our curated collections powered by AI recommendations
           </p>
         </motion.div>
+        <BudgetTracker />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {categories.map((category, index) => {
@@ -86,13 +88,13 @@ export default function Categories() {
                   </div>
 
                   <CardHeader>
-                    <CardTitle className="text-2xl mb-2 text-[#005DAA]">{category.name}</CardTitle>
+                    <CardTitle className="text-2xl mb-2 text-white">{category.name}</CardTitle>
                     <p className="text-gray-600">{category.description}</p>
                   </CardHeader>
 
                   <CardContent>
                     <div className="mb-6">
-                      <h4 className="font-semibold mb-3 text-[#005DAA]">Featured Items:</h4>
+                      <h4 className="font-semibold mb-3 text-white">Featured Items:</h4>
                       <div className="grid grid-cols-2 gap-2">
                         {category.featured.map((item) => (
                           <div
@@ -128,7 +130,7 @@ export default function Categories() {
           transition={{ delay: 0.5 }}
           className="mt-16"
         >
-          <h2 className="text-2xl font-bold mb-8 text-center text-[#005DAA]">
+          <h2 className="text-2xl font-bold mb-8 text-center text-white">
             More Categories Coming Soon
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

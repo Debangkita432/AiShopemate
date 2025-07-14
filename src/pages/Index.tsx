@@ -20,11 +20,11 @@ const Index = () => {
       try {
         const greeting = user && userProfile
           ? `Welcome back ${userProfile.name}! Ready to continue your shopping journey?`
-          : "Welcome to AIShopmate! I'm your AI shopping assistant. Ready to revolutionize your shopping experience?";
+          : "Welcome to ShopNest! I'm your AI shopping assistant. Ready to revolutionize your shopping experience?";
         const response = await generateAIResponse(greeting, shopingAssistantContext);
         setAiMessage(response);
       } catch (error) {
-        setAiMessage("Welcome to AIShopmate! I'm your AI shopping assistant ready to help you shop smarter!");
+        setAiMessage("Welcome to ShopNest! I'm your AI shopping assistant ready to help you shop smarter!");
       } finally {
         setTimeout(() => {
           setIsAiSpeaking(false);
@@ -54,7 +54,7 @@ const Index = () => {
     <div className="min-h-screen bg-white flex flex-col">
       {loading && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white">
-          <img src="/Logo.png" alt="AIShopmate Logo" className="w-24 h-24 animate-bounce" />
+          <img src="/Logo.png" alt="ShopNest Logo" className="w-24 h-24 animate-bounce" />
           <p className="mt-4 text-lg font-semibold text-[#005DAA] animate-pulse">
             Getting your smart shopping experience ready...
           </p>
@@ -86,13 +86,19 @@ const Index = () => {
                 {user ? (
                   userProfile ? (
                     <Link to="/shop">
-                      <Button className="text-white text-lg px-8 py-6" style={{ background: 'linear-gradient(to right, #005DAA, #003F73)' }}>
+                      <Button
+                        className="text-[#005DAA] font-semibold text-lg px-8 py-6"
+                        style={{ backgroundColor: '#FFC220' }}
+                      >
                         Continue Shopping
                       </Button>
                     </Link>
                   ) : (
                     <Link to="/onboarding">
-                      <Button className="text-white text-lg px-8 py-6" style={{ background: 'linear-gradient(to right, #005DAA, #003F73)' }}>
+                      <Button
+                        className="text-[#005DAA] font-semibold text-lg px-8 py-6"
+                        style={{ backgroundColor: '#FFC220' }}
+                      >
                         Complete Profile
                       </Button>
                     </Link>
@@ -100,7 +106,10 @@ const Index = () => {
                 ) : (
                   <>
                     <Link to="/signup">
-                      <Button className="text-white text-lg px-8 py-6" style={{ background: 'linear-gradient(to right, #005DAA, #003F73)' }}>
+                      <Button
+                        className="text-white font-semibold text-lg px-8 py-6"
+                        style={{ backgroundColor: '#005DAA' }}
+                      >
                         Get Started Free
                       </Button>
                     </Link>
@@ -153,7 +162,6 @@ const Index = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold mb-4 text-[#005DAA]"> Features</h2>
-
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -162,9 +170,14 @@ const Index = () => {
                 <h3 className="text-xl font-semibold text-[#005DAA] mb-3">
                   Budget Management
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 mb-4">
                   Keep track of your spending with real-time budget updates.
                 </p>
+                <Link to="/budgettracker">
+                  <Button className="text-[#005DAA] font-semibold bg-[#FFC220] hover:bg-yellow-400 transition px-6 py-2">
+                    Click Me
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -177,7 +190,7 @@ const Index = () => {
                   See how products look on you before buying.
                 </p>
                 <Link to="/virtualtryon">
-                  <Button className="text-white bg-[#005DAA] hover:bg-[#004b91] transition px-6 py-2">
+                  <Button className="text-[#005DAA] font-semibold bg-[#FFC220] hover:bg-yellow-400 transition px-6 py-2">
                     Try Now
                   </Button>
                 </Link>
@@ -188,16 +201,18 @@ const Index = () => {
       </section>
 
       <div className="fixed bottom-8 right-6 md:bottom-10 md:right-10 z-50">
-        <div className="relative group cursor-pointer">
-          <img
-            src="/chatbot.png"
-            alt="Matey Bot"
-            className="w-20 h-20 md:w-24 md:h-24 hover:scale-105 transition-transform"
-          />
-          <div className="absolute bottom-full right-0 mb-2 hidden group-hover:block bg-white text-[#005DAA] text-sm font-medium p-3 rounded-lg shadow-lg w-64">
-            Hi I'm <span className="font-bold">Matey</span>, your shop guide. I'm here to help you with all your questions!
+        <Link to="/chatbot">
+          <div className="relative group cursor-pointer">
+            <img
+              src="/chatbot.png"
+              alt="Matey Bot"
+              className="w-20 h-20 md:w-24 md:h-24 hover:scale-105 transition-transform"
+            />
+            <div className="absolute bottom-full right-0 mb-2 hidden group-hover:block bg-white text-[#005DAA] text-sm font-medium p-3 rounded-lg shadow-lg w-64">
+              Hi I'm <span className="font-bold">Matey</span>, your shop guide. I'm here to help you with all your questions!
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
 
       <Footer />

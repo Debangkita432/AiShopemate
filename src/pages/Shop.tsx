@@ -5,6 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ShoppingCart, Heart, Star } from 'lucide-react';
+import BudgetTracker from '../components/BudgetTracker';
+import { useCart } from '../components/CartContext';
+import { useAuth } from '../hooks/useAuth';
+import { toast } from 'sonner';
 
 const categories = [
   {
@@ -60,6 +64,10 @@ const categories = [
 export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState('electronics');
   const [favorites, setFavorites] = useState<number[]>([]);
+  const { addToCart, getTotal } = useCart();
+  const { userProfile } = useAuth();
+  const budget = userProfile?.budget || 0;
+  const spent = getTotal();
 
   const toggleFavorite = (productId: number) => {
     setFavorites(prev => 
@@ -71,15 +79,18 @@ export default function Shop() {
 
   const currentCategory = categories.find(cat => cat.id === selectedCategory);
 
+  const canAddToCart = (price: number) => spent + price <= budget;
+
   return (
     <div className="min-h-screen bg-dark-gradient pt-20 px-6">
       <div className="max-w-7xl mx-auto">
+        <BudgetTracker />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold mb-4 bg-neon-gradient bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold mb-4 bg-white bg-clip-text text-transparent">
             AI-Powered Shopping
           </h1>
           <p className="text-xl text-muted-foreground">
@@ -93,7 +104,7 @@ export default function Shop() {
               <TabsTrigger
                 key={category.id}
                 value={category.id}
-                className="data-[state=active]:bg-neon-gradient data-[state=active]:text-black"
+                className="data-[state=active]:bg-white data-[state=active]:text-black"
               >
                 {category.name}
               </TabsTrigger>
@@ -103,71 +114,91 @@ export default function Shop() {
           {categories.map((category) => (
             <TabsContent key={category.id} value={category.id}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {category.products.map((product, index) => (
-                  <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Card className="glass-morphism hover-glow group cursor-pointer h-full">
-                      <CardHeader className="p-0">
-                        <div className="relative overflow-hidden rounded-t-lg">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm"
-                            onClick={() => toggleFavorite(product.id)}
-                          >
-                            <Heart 
-                              className={`w-4 h-4 ${
-                                favorites.includes(product.id) 
-                                  ? 'fill-red-500 text-red-500' 
-                                  : 'text-muted-foreground'
-                              }`} 
+                {category.products.map((product, index) => {
+                  const price = Number(product.price.replace(/[^\d.]/g, ''));
+                  const disabled = !canAddToCart(price);
+                  return (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Card className="glass-morphism hover:shadow-lg cursor-pointer h-full">
+                        <CardHeader className="p-0">
+                          <div className="relative overflow-hidden rounded-t-lg">
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                             />
-                          </Button>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="p-4">
-                        <CardTitle className="text-lg mb-2 text-foreground">
-                          {product.name}
-                        </CardTitle>
-                        <div className="flex items-center mb-2">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm"
+                              onClick={() => toggleFavorite(product.id)}
+                            >
+                              <Heart 
                                 className={`w-4 h-4 ${
-                                  i < Math.floor(product.rating)
-                                    ? 'fill-yellow-400 text-yellow-400'
+                                  favorites.includes(product.id) 
+                                    ? 'fill-red-500 text-red-500' 
                                     : 'text-muted-foreground'
-                                }`}
+                                }`} 
                               />
-                            ))}
-                            <span className="ml-2 text-sm text-muted-foreground">
-                              {product.rating}
-                            </span>
+                            </Button>
                           </div>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-2xl font-bold text-neon-green">
-                            {product.price}
-                          </span>
-                          <Button className="bg-neon-gradient text-black hover-glow">
-                            <ShoppingCart className="w-4 h-4 mr-2" />
-                            Add to Cart
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ))}
+                        </CardHeader>
+                        <CardContent className="p-4">
+                          <CardTitle className="text-lg mb-2 text-foreground">
+                            {product.name}
+                          </CardTitle>
+                          <div className="flex items-center mb-2">
+                            <div className="flex items-center">
+                              {[...Array(5)].map((_, i) => (
+                                <Star
+                                  key={i}
+                                  className={`w-4 h-4 ${
+                                    i < Math.floor(product.rating)
+                                      ? 'fill-yellow-400 text-yellow-400'
+                                      : 'text-muted-foreground'
+                                  }`}
+                                />
+                              ))}
+                              <span className="ml-2 text-sm text-muted-foreground">
+                                {product.rating}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-2xl font-bold text-white">
+                              {product.price}
+                            </span>
+                            <Button
+                              className="bg-white text-black hover:shadow-lg"
+                              disabled={disabled}
+                              onClick={() => {
+                                if (disabled) {
+                                  toast.error('Adding this item would exceed your budget!');
+                                } else {
+                                  addToCart({
+                                    id: product.id,
+                                    name: product.name,
+                                    price,
+                                    image: product.image,
+                                  });
+                                  toast.success('Added to cart!');
+                                }
+                              }}
+                            >
+                              <ShoppingCart className="w-4 h-4 mr-2" />
+                              {disabled ? 'Over Budget' : 'Add to Cart'}
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
               </div>
             </TabsContent>
           ))}

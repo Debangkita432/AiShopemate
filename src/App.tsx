@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import { ThemeProvider } from "./components/theme-provider";
 import { Navigation } from "./components/Navigation";
+import { CartProvider } from "./components/CartContext";
 
 // Pages
 import Index from "./pages/Index";
@@ -17,8 +18,10 @@ import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/profile";
 import ShowProfile from "./pages/account";
-import VirtualTryon from "./pages/virtualTryon.tsx";
-
+import VirtualOnboarding from "./pages/virtualOnboarding";
+import CartPage from "./pages/Cart";
+import ChatbotPage from "./pages/chatbot";
+import BudgetTrackerPage from './pages/BudgetTrackerPage';
 
 
 const queryClient = new QueryClient();
@@ -28,25 +31,30 @@ const App = () => (
     <ThemeProvider defaultTheme="dark" storageKey="aishopmate-ui-theme">
       <TooltipProvider>
         <AuthProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <div className="min-h-screen bg-dark-gradient">
-              <Navigation />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/onboarding" element={<Onboarding />} />
-                <Route path="/shop" element={<Shop />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/account" element={<ShowProfile />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/virtualtryon" element={<VirtualTryon />} /> 
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </div>
-          </BrowserRouter>
+          <CartProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <div className="min-h-screen bg-dark-gradient">
+                <Navigation />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/onboarding" element={<Onboarding />} />
+                  <Route path="/shop" element={<Shop />} />
+                  <Route path="/categories" element={<Categories />} />
+                  <Route path="/account" element={<ShowProfile />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/virtualtryon" element={<VirtualOnboarding />} /> 
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="/chatbot" element={<ChatbotPage />} />
+                  <Route path="/budgettracker" element={<BudgetTrackerPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+            </BrowserRouter>
+          </CartProvider>
         </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
